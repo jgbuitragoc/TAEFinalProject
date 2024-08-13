@@ -12,7 +12,7 @@ public abstract class Teacher extends Person {
     public abstract double calculateSalary();
 
     public String getTeacherData() {
-        return "- CC " + this.getIdentification() + " - " +
+        return "CC " + this.getIdentification() + " - " +
                 this.getName() + ".";
     }
 

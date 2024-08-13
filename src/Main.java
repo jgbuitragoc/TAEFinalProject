@@ -20,8 +20,8 @@ public class Main {
         System.out.println("2. Create a new student.");
         System.out.println("3. Create a new teacher.");
         System.out.println("4. Get teacher's information.");
-        System.out.println("5. Get a class information.");
-        System.out.println("6. Get classes by student identification.");
+        System.out.println("5. Class options.");
+        System.out.println("6. Student options.");
         System.out.println("7. Exit.");
         System.out.print("Transaction #: ");
         int response = getIntFromInput();
@@ -39,13 +39,19 @@ public class Main {
                 System.out.println("------------------");
                 break;
             case 4:
+                System.out.println(college.getTeachersInfo());
 
                 System.out.println("------------------");
                 break;
             case 5:
-
+                System.out.println(college.getLecturesInfo());
+                System.out.println(college.lecturesMenu());
                 System.out.println("------------------");
                 break;
+            case 6:
+                System.out.println(college.getStudentsInfo());
+                System.out.println(college.studentsMenu());
+                System.out.println("------------------");
             default:
                 break;
         }
