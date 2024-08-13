@@ -3,6 +3,7 @@ import model.users.FullTimeTeacher;
 import model.users.PartTimeTeacher;
 import model.users.Student;
 import model.users.Teacher;
+
 import static utils.inputs.*;
 
 public class Main {
@@ -26,29 +27,15 @@ public class Main {
         int response = getIntFromInput();
         switch (response) {
             case 1:
-                System.out.print("Enter class name:");
-                String name = getStringFromInput();
-                System.out.println(" ");
-                Lecture newLecture = new Lecture(name);
-                college.getGlobalLectures().add(newLecture);
-                System.out.println("Class created successfully");
+                System.out.println(college.createLecture());
                 System.out.println("------------------");
                 break;
             case 2:
-                Student newStudent = college.createStudent();
-                college.getGlobalStudents().add(newStudent);
-                System.out.println("Student created successfully");
+                System.out.println(college.createStudent());
                 System.out.println("------------------");
                 break;
             case 3:
-                System.out.println("Choose a type of teacher:");
-                System.out.println("1. Full time teacher.");
-                System.out.println("2. Part time teacher.");
-                System.out.print("Type:");
-                int teacherType = getIntFromInput();
-                Teacher newTeacher = college.createTeacher(teacherType);
-                college.getGlobalTeachers().add(newTeacher);
-                System.out.println("Teacher created successfully");
+                System.out.println(college.createTeacher());
                 System.out.println("------------------");
                 break;
             case 4:

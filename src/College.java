@@ -20,8 +20,15 @@ public class College {
         this.name = name;
     }
 
+    public String createLecture() {
+        System.out.print("Enter class name:");
+        String name = getStringFromInput();
+        System.out.println(" ");
+        globalLectures.add(new Lecture(name));
+        return "Class created successfully.";
+    }
 
-    public Student createStudent() {
+    public String createStudent() {
         System.out.print("Enter student's name: ");
         String name = getStringFromInput();
         System.out.println(" ");
@@ -30,10 +37,23 @@ public class College {
         System.out.println(" ");
         System.out.print("Enter student's identification: ");
         String identification = getStringFromInput();
-        return new Student(name, age, identification);
+        globalStudents.add(new Student(name, age, identification));
+        return "Student created successfully.";
     }
 
-    public Teacher createTeacher(int teacherType) {
+    public String createTeacher() {
+        int teacherType = 0;
+        while (teacherType == 0) {
+            System.out.println("Choose a type of teacher:");
+            System.out.println("1. Full time teacher.");
+            System.out.println("2. Part time teacher.");
+            System.out.print("Type:");
+            teacherType = getIntFromInput();
+            if (teacherType > 2) { //number of options
+                teacherType = 0;
+            }
+        }
+
         System.out.print("Enter teacher's name: ");
         String name = getStringFromInput();
         System.out.println(" ");
@@ -51,16 +71,18 @@ public class College {
                 System.out.print("Enter teacher's experience years:");
                 int experienceYears = getIntFromInput();
                 newTeacher = new FullTimeTeacher(name, age, identification, baseSalary, experienceYears);
-                return newTeacher;
+                globalTeachers.add(newTeacher);
+                return "Teacher created successfully.";
             case 2:
                 System.out.print("Enter teacher's hours per week:");
                 int weeklyHours = getIntFromInput();
                 newTeacher = new PartTimeTeacher(name, age, identification, baseSalary, weeklyHours);
-                return newTeacher;
+                globalTeachers.add(newTeacher);
+                return "Teacher created successfully.";
             default:
                 break;
         }
-        return null;
+        return "Teacher not created!";
     }
 
 
