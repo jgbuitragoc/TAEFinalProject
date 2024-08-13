@@ -4,8 +4,8 @@ public class PartTimeTeacher extends Teacher {
 
     private int weeklyHours;
 
-    public PartTimeTeacher( String name, int age, String identification, double baseSalary, int weeklyHours) {
-        super( name, age, identification, baseSalary);
+    public PartTimeTeacher(String name, int age, String identification, double baseSalary, int weeklyHours) {
+        super(name, age, identification, baseSalary);
         this.weeklyHours = weeklyHours;
     }
 
@@ -16,5 +16,12 @@ public class PartTimeTeacher extends Teacher {
 
     public void setWeeklyHours(int weeklyHours) {
         this.weeklyHours = weeklyHours;
+    }
+
+    @Override
+    public String getTeacherFullData() {
+        return "CC:" + this.getIdentification() + " - base salary: $" + this.baseSalary + " - Name:" +
+                this.getName() + " - weekly hours: " + this.weeklyHours + " - Salary: "
+                + this.calculateSalary();
     }
 }

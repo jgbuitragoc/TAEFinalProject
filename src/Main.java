@@ -19,7 +19,7 @@ public class Main {
         System.out.println("1. Create a new class.");
         System.out.println("2. Create a new student.");
         System.out.println("3. Create a new teacher.");
-        System.out.println("4. Get teacher's information.");
+        System.out.println("4. Teacher options.");
         System.out.println("5. Class options.");
         System.out.println("6. Student options.");
         System.out.println("7. Exit.");
@@ -27,28 +27,33 @@ public class Main {
         int response = getIntFromInput();
         switch (response) {
             case 1:
+                System.out.println("------------------");
                 System.out.println(college.createLecture());
                 System.out.println("------------------");
                 break;
             case 2:
+                System.out.println("------------------");
                 System.out.println(college.createStudent());
                 System.out.println("------------------");
                 break;
             case 3:
+                System.out.println("------------------");
                 System.out.println(college.createTeacher());
                 System.out.println("------------------");
                 break;
             case 4:
-                System.out.println(college.getTeachersInfo());
-
+                System.out.println("------------------");
+                System.out.println(college.teachersMenu());
                 System.out.println("------------------");
                 break;
             case 5:
+                System.out.println("------------------");
                 System.out.println(college.getLecturesInfo());
                 System.out.println(college.lecturesMenu());
                 System.out.println("------------------");
                 break;
             case 6:
+                System.out.println("------------------");
                 System.out.println(college.getStudentsInfo());
                 System.out.println(college.studentsMenu());
                 System.out.println("------------------");
@@ -60,6 +65,4 @@ public class Main {
             processUserTransaction(college);
         }
     }
-
-
 }

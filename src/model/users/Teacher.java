@@ -3,8 +3,8 @@ package model.users;
 public abstract class Teacher extends Person {
     protected double baseSalary;
 
-    public Teacher( String name, int age, String identification, double baseSalary) {
-        super( name, age, identification);
+    public Teacher(String name, int age, String identification, double baseSalary) {
+        super(name, age, identification);
         this.baseSalary = baseSalary;
     }
 
@@ -15,6 +15,8 @@ public abstract class Teacher extends Person {
         return "CC " + this.getIdentification() + " - " +
                 this.getName() + ".";
     }
+
+    public abstract String getTeacherFullData();
 
 
 }

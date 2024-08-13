@@ -14,9 +14,8 @@ public class Student extends Person {
         super(name, age, identification);
     }
 
-    public String enroll(Lecture lecture) {
+    public void enroll(Lecture lecture) {
         this.lectures.add(lecture);
-        return lecture.getName() + " Enrolled successfully";
     }
 
     public String getStudentData() {
@@ -26,10 +25,8 @@ public class Student extends Person {
 
     public String getLecturesInfo() {
         StringBuilder lecturesInfo = new StringBuilder();
-        int index = 0;
         for (Lecture lecture : this.lectures) {
             lecturesInfo.append(lecture.getName()).append("\n");
-            index++;
         }
         return lecturesInfo.toString();
     }

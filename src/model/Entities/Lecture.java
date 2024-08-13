@@ -41,15 +41,10 @@ public class Lecture {
     }
 
 
-
     // getter & setters
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getClassroom() {
@@ -58,14 +53,6 @@ public class Lecture {
 
     public void setClassroom(String classroom) {
         this.classroom = classroom;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
     }
 
     public Teacher getTeacher() {

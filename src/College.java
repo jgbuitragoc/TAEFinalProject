@@ -16,8 +16,10 @@ public class College {
     private final List<Student> globalStudents = new ArrayList<>();
     private final List<Teacher> globalTeachers = new ArrayList<>();
 
+
     public College(String name) {
         this.name = name;
+        initialize();
     }
 
     public String createLecture() {
@@ -87,7 +89,6 @@ public class College {
 
 
     public String lecturesMenu() {
-        System.out.println("------------------");
         int lectureOption = 0;
         while (lectureOption == 0) {
             System.out.println("Class options:");
@@ -137,16 +138,44 @@ public class College {
         return "";
     }
 
+    public String teachersMenu() {
+        int teacherOption = 0;
+        while (teacherOption == 0) {
+            System.out.println("Teachers options:");
+            System.out.println("1. Show teachers list.");
+            System.out.println("2. Show teacher info by id.");
+            System.out.println("3. Back");
+            System.out.print("Option: ");
+            teacherOption = getIntFromInput();
+            if (teacherOption == 1) {
+                return getTeachersInfo();
+            }
+            if (teacherOption == 2) {
+                System.out.println("Teachers:");
+                System.out.println(this.getTeachersInfo());
+                System.out.print("Teacher id: ");
+                int teacherId = getIntFromInput();
+                Teacher teacher = this.getTeacherById(teacherId);
+                if (teacher == null) {
+                    return "Teacher not found";
+                }
+                return teacher.getTeacherFullData();
+            } else if (teacherOption != 4) {
+                teacherOption = 0;
+            }
+        }
+        return "";
+    }
+
     public String studentsMenu() {
-        System.out.println("------------------");
-        int lectureOption = 0;
-        while (lectureOption == 0) {
+        int studentOption = 0;
+        while (studentOption == 0) {
             System.out.println("Students options:");
             System.out.println("1. Get student classes by id.");
             System.out.println("2. Enroll student to a class.");
             System.out.println("2. Back");
-            lectureOption = getIntFromInput();
-            if (lectureOption == 1 || lectureOption == 2) {
+            studentOption = getIntFromInput();
+            if (studentOption == 1 || studentOption == 2) {
                 System.out.print("Enter student id:");
                 int studentId = getIntFromInput();
                 System.out.println(" ");
@@ -154,8 +183,8 @@ public class College {
                 if (student == null) {
                     return "Student not found.";
                 }
-                if (lectureOption == 1) return student.getLecturesInfo();
-                if (lectureOption == 2) {
+                if (studentOption == 1) return student.getLecturesInfo();
+                if (studentOption == 2) {
                     System.out.println("Classes available:");
                     System.out.println(this.getLecturesInfo());
                     System.out.print("Class id: ");
@@ -164,12 +193,10 @@ public class College {
                     if (lecture == null) {
                         return "Class not found";
                     }
-                    lecture.enrollStudent(student);
-                    return "student " + student.getName() + " enrolled to class " +
-                            lecture.getName() + " successfully";
+                    return lecture.enrollStudent(student);
                 }
-            } else if (lectureOption != 4) {
-                lectureOption = 0;
+            } else if (studentOption != 4) {
+                studentOption = 0;
             }
         }
         return "";
@@ -234,32 +261,69 @@ public class College {
         }
     }
 
-    public Student getLecturesByStudentId(int id) {
-        try {
-            return this.globalStudents.get(id);
-        } catch (IndexOutOfBoundsException | NullPointerException e) {
-            return null;
-        }
-    }
-
-    public List<Lecture> getGlobalLectures() {
-        return globalLectures;
-    }
-
-    public List<Teacher> getGlobalTeachers() {
-        return globalTeachers;
-    }
-
-    public List<Student> getGlobalStudents() {
-        return globalStudents;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    private void initialize() {
+        Teacher teacher1 = new FullTimeTeacher("ROBERT FLOWERS", 70, "45678643", 100000, 20);
+        Teacher teacher2 = new FullTimeTeacher("FREDDY DONOVAN", 50, "52323123", 100000, 15);
+        Teacher teacher3 = new PartTimeTeacher("LAURA BONILLA", 30, "12312333", 10000, 3);
+        Teacher teacher4 = new PartTimeTeacher("CAMILO CIFUENTES", 35, "57664231", 10000, 4);
+        this.globalTeachers.add(teacher1);
+        this.globalTeachers.add(teacher2);
+        this.globalTeachers.add(teacher3);
+        this.globalTeachers.add(teacher4);
+
+
+        Student student1 = new Student("CARLOS SANABRIA", 20, "11234123");
+        Student student2 = new Student("PETER GINEBRA", 21, "13236767");
+        Student student3 = new Student("ROMARIO LUCUMI", 19, "12988676");
+        Student student4 = new Student("CAROLINA LAPORCHE", 20, "12348676");
+        Student student5 = new Student("NEFARIO LALINDE", 20, "12398765");
+        Student student6 = new Student("RUPERTA MANRIQUE", 22, "12425894");
+        this.globalStudents.add(student1);
+        this.globalStudents.add(student2);
+        this.globalStudents.add(student3);
+        this.globalStudents.add(student4);
+        this.globalStudents.add(student5);
+        this.globalStudents.add(student6);
+
+        Lecture lecture1 = new Lecture("MATH");
+        Lecture lecture2 = new Lecture("HISTORY");
+        Lecture lecture3 = new Lecture("SPANISH");
+        Lecture lecture4 = new Lecture("SCIENCE");
+
+        lecture1.setClassroom("classroom 1");
+        lecture2.setClassroom("classroom 2");
+        lecture3.setClassroom("classroom 3");
+        lecture4.setClassroom("classroom 4");
+
+        lecture1.setTeacher(teacher1);
+        lecture2.setTeacher(teacher2);
+        lecture3.setTeacher(teacher3);
+        lecture4.setTeacher(teacher4);
+
+        lecture1.enrollStudent(student1);
+        lecture1.enrollStudent(student2);
+        lecture1.enrollStudent(student3);
+
+        lecture2.enrollStudent(student2);
+        lecture2.enrollStudent(student3);
+        lecture2.enrollStudent(student4);
+
+        lecture3.enrollStudent(student3);
+        lecture3.enrollStudent(student4);
+        lecture3.enrollStudent(student5);
+
+        lecture4.enrollStudent(student4);
+        lecture4.enrollStudent(student5);
+        lecture4.enrollStudent(student6);
+        this.globalLectures.add(lecture1);
+        this.globalLectures.add(lecture2);
+        this.globalLectures.add(lecture3);
+        this.globalLectures.add(lecture4);
     }
 
 
