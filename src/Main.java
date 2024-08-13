@@ -1,20 +1,19 @@
 import model.Entities.Lecture;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import model.users.FullTimeTeacher;
+import model.users.PartTimeTeacher;
+import model.users.Student;
+import model.users.Teacher;
 import static utils.inputs.*;
 
 public class Main {
 
-
     public static void main(String[] args) {
-        List<Lecture> globalLectures = new ArrayList<>();
-        System.out.println(" Welcome to Globant college. what do you need today?");
-        processUserTransaction(globalLectures);
+        College college = new College("Globant college");
+        System.out.println(" Welcome to " + college.getName() + ". what do you need today?");
+        processUserTransaction(college);
     }
 
-    public static void processUserTransaction(List<Lecture> globalLectures) {
+    public static void processUserTransaction(College college) {
         System.out.println("Select an option:");
         System.out.println("1. Create a new class.");
         System.out.println("2. Create a new student.");
@@ -27,15 +26,29 @@ public class Main {
         int response = getIntFromInput();
         switch (response) {
             case 1:
-
+                System.out.print("Enter class name:");
+                String name = getStringFromInput();
+                System.out.println(" ");
+                Lecture newLecture = new Lecture(name);
+                college.getGlobalLectures().add(newLecture);
+                System.out.println("Class created successfully");
                 System.out.println("------------------");
                 break;
             case 2:
-
+                Student newStudent = college.createStudent();
+                college.getGlobalStudents().add(newStudent);
+                System.out.println("Student created successfully");
                 System.out.println("------------------");
                 break;
             case 3:
-
+                System.out.println("Choose a type of teacher:");
+                System.out.println("1. Full time teacher.");
+                System.out.println("2. Part time teacher.");
+                System.out.print("Type:");
+                int teacherType = getIntFromInput();
+                Teacher newTeacher = college.createTeacher(teacherType);
+                college.getGlobalTeachers().add(newTeacher);
+                System.out.println("Teacher created successfully");
                 System.out.println("------------------");
                 break;
             case 4:
@@ -51,8 +64,9 @@ public class Main {
         }
 
         if (response != 7) {
-            processUserTransaction(globalLectures);
+            processUserTransaction(college);
         }
     }
+
 
 }
