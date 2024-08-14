@@ -73,13 +73,13 @@ public class College {
                 System.out.print("Enter teacher's experience years:");
                 int experienceYears = getIntFromInput();
                 newTeacher = new FullTimeTeacher(name, age, identification, baseSalary, experienceYears);
-                globalTeachers.add(newTeacher);
+                this.globalTeachers.add(newTeacher);
                 return "Teacher created successfully.";
             case 2:
                 System.out.print("Enter teacher's hours per week:");
                 int weeklyHours = getIntFromInput();
                 newTeacher = new PartTimeTeacher(name, age, identification, baseSalary, weeklyHours);
-                globalTeachers.add(newTeacher);
+                this.globalTeachers.add(newTeacher);
                 return "Teacher created successfully.";
             default:
                 break;
@@ -92,37 +92,40 @@ public class College {
         int lectureOption = 0;
         while (lectureOption == 0) {
             System.out.println("Class options:");
-            System.out.println("1. Get class information by id.");
-            System.out.println("2. Set classroom by id.");
-            System.out.println("3. Set teacher by id.");
-            System.out.println("4. Back.");
+            System.out.println("1. Create a new class.");
+            System.out.println("2. Get class information by id.");
+            System.out.println("3. Set classroom by id.");
+            System.out.println("4. Set teacher by id.");
+            System.out.println("5. Back.");
             System.out.print("Option: ");
             lectureOption = getIntFromInput();
-            if (lectureOption == 1 || lectureOption == 2 || lectureOption == 3) {
+            if (lectureOption == 1) {
+                return this.createLecture();
+            } else if (lectureOption == 2 || lectureOption == 3 || lectureOption == 4) {
                 System.out.print("Enter class id:");
                 int lectureId = getIntFromInput();
                 System.out.println(" ");
-                Lecture lecture = getLectureById(lectureId);
+                Lecture lecture = this.getLectureById(lectureId);
                 if (lecture == null) {
                     return "Lecture not found.";
                 }
-                if (lectureOption == 1) {
+                if (lectureOption == 2) {
                     return lecture.getLectureData();
                 }
-                if (lectureOption == 2) {
+                if (lectureOption == 3) {
                     System.out.print("Classroom:");
                     String classroom = getStringFromInput();
                     lecture.setClassroom(classroom);
                     return "Classroom " + lecture.getClassroom()
                             + " asigned to class " + lecture.getName();
                 }
-                if (lectureOption == 3) {
+                if (lectureOption == 4) {
                     System.out.println("Available teachers:");
-                    System.out.println(getTeachersInfo());
+                    System.out.println(this.getTeachersInfo());
                     System.out.print("Teacher to assign id:");
                     int teacherId = getIntFromInput();
                     System.out.println(" ");
-                    Teacher teacher = getTeacherById(teacherId);
+                    Teacher teacher = this.getTeacherById(teacherId);
                     if (teacher != null) {
                         lecture.setTeacher(teacher);
                         return "Teacher " + lecture.getTeacher().getName()
@@ -130,7 +133,7 @@ public class College {
                     } else {
                         return "Teacher not found.";
                     }
-                } else if (lectureOption != 4) {
+                } else if (lectureOption != 5) {
                     lectureOption = 0;
                 }
             }
@@ -142,15 +145,19 @@ public class College {
         int teacherOption = 0;
         while (teacherOption == 0) {
             System.out.println("Teachers options:");
-            System.out.println("1. Show teachers list.");
-            System.out.println("2. Show teacher info by id.");
-            System.out.println("3. Back");
+            System.out.println("1. Create a new teacher.");
+            System.out.println("2. Show teachers list.");
+            System.out.println("3. Show teacher info by id.");
+            System.out.println("4. Back");
             System.out.print("Option: ");
             teacherOption = getIntFromInput();
             if (teacherOption == 1) {
-                return getTeachersInfo();
+                return this.createTeacher();
             }
             if (teacherOption == 2) {
+                return this.getTeachersInfo();
+            }
+            if (teacherOption == 3) {
                 System.out.println("Teachers:");
                 System.out.println(this.getTeachersInfo());
                 System.out.print("Teacher id: ");
@@ -171,25 +178,28 @@ public class College {
         int studentOption = 0;
         while (studentOption == 0) {
             System.out.println("Students options:");
-            System.out.println("1. Get student classes by id.");
-            System.out.println("2. Enroll student to a class.");
-            System.out.println("2. Back");
+            System.out.println("1. Create a new student.");
+            System.out.println("2. Get student classes by id.");
+            System.out.println("3. Enroll student to a class.");
+            System.out.println("4. Back");
             studentOption = getIntFromInput();
-            if (studentOption == 1 || studentOption == 2) {
+            if (studentOption == 1) {
+                return this.createStudent();
+            } else if (studentOption == 2 || studentOption == 3) {
                 System.out.print("Enter student id:");
                 int studentId = getIntFromInput();
                 System.out.println(" ");
-                Student student = getStudentById(studentId);
+                Student student = this.getStudentById(studentId);
                 if (student == null) {
                     return "Student not found.";
                 }
-                if (studentOption == 1) return student.getLecturesInfo();
-                if (studentOption == 2) {
+                if (studentOption == 2) return student.getLecturesInfo();
+                if (studentOption == 3) {
                     System.out.println("Classes available:");
                     System.out.println(this.getLecturesInfo());
                     System.out.print("Class id: ");
                     int lectureId = getIntFromInput();
-                    Lecture lecture = getLectureById(lectureId);
+                    Lecture lecture = this.getLectureById(lectureId);
                     if (lecture == null) {
                         return "Class not found";
                     }

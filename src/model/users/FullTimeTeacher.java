@@ -21,7 +21,7 @@ public class FullTimeTeacher extends Teacher {
 
     @Override
     public String getTeacherFullData() {
-        return "CC:" + this.getIdentification() + " - base salary: $" + this.baseSalary + " - Name:" +
+        return "Full time teacher - CC:" + this.getIdentification() + " - base salary: $" + this.baseSalary + " - Name:" +
                 this.getName() + " - experience years: " + this.experienceYears + " - Salary: $"
                 + this.calculateSalary();
     }
